@@ -34,7 +34,7 @@ def _get_roll_over_handler(log_filename):
 
     # Formatter
     formatter = logging.Formatter(
-        "%(asctime)s;%(levelname)s;%(filename)s;%(lineno)d;%(message)s", "%Y-%m-%d %H:%M:%S")
+        "%(created)f;%(asctime)s;%(levelname)s;%(filename)s;%(lineno)d;%(message)s", "%Y-%m-%d %H:%M:%S")
     log_handler.setFormatter(formatter)
 
     return log_handler
