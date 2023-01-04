@@ -1,4 +1,5 @@
 import os
+import zlib
 from datetime import datetime
 
 import requests
@@ -47,7 +48,7 @@ def make_request_and_save(full_request=False):
     # API call
     url_switch = 'f' if is_hourly else 'r'
     url = BASE_URL + f'timetables/v1/{url_switch}chg/{station_eva_number}'
-    logger.info(f"Calling endpoint: {url}")
+    logger.info(f"Calling endpoint: {url_switch}chg/{station_eva_number}")
 
     xml_string = ""
     api_error = False
@@ -59,12 +60,17 @@ def make_request_and_save(full_request=False):
         logger.error(str(e))
         api_error = True
 
-    # Save response
+    # TODO: if is_hourly -> also make API call to "planned" endpoint
+
     if not api_error:
+        # Compress
+        bytes = zlib.compress(xml_string.encode('utf-8'),
+                              level=zlib.Z_BEST_COMPRESSION)
+        # Save response
         filename = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
-        path = f'./download/{filename}-{path_suffix}.xml'
-        with open(path, 'w', encoding='utf-8') as f:
-            f.write(xml_string)
+        path = f'./download/{filename}-{path_suffix}.xml.compressed'
+        with open(path, 'wb') as f:
+            f.write(bytes)
 
 
 def _check_for_downloads_directory():
@@ -75,8 +81,8 @@ def _check_for_downloads_directory():
 def start_downloads():
     _check_for_downloads_directory()
 
-    print('Waiting till next minute...')
-    sleep_till_start_of_next_minute()
+    # print('Waiting till next minute...')
+    # sleep_till_start_of_next_minute()
     print('Started bahn.py execution...')
     # one full request in the beginning
     make_request_and_save(full_request=True)
