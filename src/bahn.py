@@ -32,14 +32,14 @@ headers = {
 }
 
 
-def make_request_and_save(overwrite_full=False):
+def make_request_and_save(full_request=False):
     global elapsed_time
     elapsed_time += INTERVAL_SECONDS
     is_hourly = False
     if elapsed_time == HOUR_IN_SECONDS:
         elapsed_time = 0
         is_hourly = True
-    if overwrite_full:
+    if full_request:
         is_hourly = True
 
     path_suffix = 'full' if is_hourly else 'recent'
@@ -79,5 +79,5 @@ def start_downloads():
     sleep_till_start_of_next_minute()
     print('Started bahn.py execution...')
     # one full request in the beginning
-    make_request_and_save(overwrite_full=True)
-    every(INTERVAL_SECONDS, make_request_and_save)
+    make_request_and_save(full_request=True)
+    every(INTERVAL_SECONDS, make_request_and_save, execute_immediately=False)

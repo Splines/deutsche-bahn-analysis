@@ -6,12 +6,16 @@ from datetime import datetime
 # https://stackoverflow.com/a/59548973
 socket.setdefaulttimeout(30)  # in seconds
 
-def every(delay: int, task, *args, **kwargs):
+
+def every(delay: int, task, execute_immediately: bool, *args, **kwargs):
     """
     Executes the task with the passed in arguments every `delay` seconds.
     Adapted from https://stackoverflow.com/a/49801719
     """
-    next_time = time.time()  # execute immediately
+    next_time = time.time()
+    if not execute_immediately:
+        next_time += delay
+        
     while True:
         time.sleep(max(0, next_time - time.time()))
         try:
@@ -24,6 +28,7 @@ def every(delay: int, task, *args, **kwargs):
         next_time += num_skipped_tasks * delay
 
         next_time += delay
+
 
 def sleep_till_start_of_next_minute():
     sleeptime = 60 - datetime.utcnow().second
