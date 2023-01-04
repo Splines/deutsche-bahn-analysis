@@ -5,15 +5,13 @@ from datetime import datetime
 import requests
 from dotenv import load_dotenv
 
-from logging_custom import init_logger
+from logging_setup import init_bahn_logger
 from schedule import every, sleep_till_start_of_next_minute
 
 load_dotenv()
 
 
-init_logger()
-logger = logging.getLogger('db')
-print('Deutsche Bahn logger initiated')
+logger = init_bahn_logger()
 
 # has to add up to one hour, otherwise script will break (!)
 INTERVAL_SECONDS = 60 * 5  # every 5 minutes
@@ -71,8 +69,17 @@ def make_request_and_save(overwrite_full=False):
             f.write(xml_string)
 
 
-print('Waiting till next minute...')
-sleep_till_start_of_next_minute()
-print('Started bahn.py execution...')
-make_request_and_save(overwrite_full=True)  # one full request in the beginning
-every(INTERVAL_SECONDS, make_request_and_save)
+def _check_for_downloads_directory():
+    if not os.path.exists('./download'):
+        os.mkdir('./download/')
+
+
+if __name__ == '__main__':
+    _check_for_downloads_directory()
+
+    print('Waiting till next minute...')
+    sleep_till_start_of_next_minute()
+    print('Started bahn.py execution...')
+    # one full request in the beginning
+    make_request_and_save(overwrite_full=True)
+    every(INTERVAL_SECONDS, make_request_and_save)
