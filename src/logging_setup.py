@@ -2,21 +2,9 @@ import logging
 import logging.handlers
 import os
 
-
-def disable_logger():
-    logging.disable(logging.CRITICAL)
-
-
-def init_wrapper_logger():
-    logger = logging.getLogger('wrapper')
-    logger.setLevel(logging.DEBUG)
-
-    # File handler
-    _check_for_log_directory()
-    logger.addHandler(_get_roll_over_handler('./logs/wrapper.log'))
-
-    print('Wrapper logger initiated')
-    return logger
+# def disable_logger():
+#     logging.disable(logging.CRITICAL)
+# dislabe_logger()
 
 
 def init_bahn_logger():
@@ -27,7 +15,7 @@ def init_bahn_logger():
     _check_for_log_directory()
     logger.addHandler(_get_roll_over_handler('./logs/bahn.log'))
 
-    print('Deutsche Bahn logger initiated')
+    print('Deutsche Bahn logger initialized')
     return logger
 
 
@@ -46,10 +34,14 @@ def _get_roll_over_handler(log_filename):
 
     # Formatter
     formatter = logging.Formatter(
-        "%(asctime)s;%(levelname)s;%(name)s;%(message)s", "%Y-%m-%d %H:%M:%S")
+        "%(asctime)s;%(levelname)s;%(filename)s;%(lineno)d;%(message)s", "%Y-%m-%d %H:%M:%S")
     log_handler.setFormatter(formatter)
 
     return log_handler
+
+
+def get_bahn_logger():
+    return logging.getLogger('bahn')
 
 
 if __name__ == '__main__':

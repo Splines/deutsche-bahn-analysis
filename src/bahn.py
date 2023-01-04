@@ -1,17 +1,15 @@
-import logging
 import os
 from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
 
-from logging_setup import init_bahn_logger
+from logging_setup import get_bahn_logger
 from schedule import every, sleep_till_start_of_next_minute
 
 load_dotenv()
 
-
-logger = init_bahn_logger()
+logger = get_bahn_logger()
 
 # has to add up to one hour, otherwise script will break (!)
 INTERVAL_SECONDS = 60 * 5  # every 5 minutes
@@ -74,7 +72,7 @@ def _check_for_downloads_directory():
         os.mkdir('./download/')
 
 
-if __name__ == '__main__':
+def start_downloads():
     _check_for_downloads_directory()
 
     print('Waiting till next minute...')
