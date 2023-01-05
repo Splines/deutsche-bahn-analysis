@@ -1,0 +1,5 @@
+# Cron job to monitor size of downloads folder
+# adapted from: https://www.robustperception.io/monitoring-directory-sizes-with-the-textfile-collector/
+# Put this file to /etc/cron.d/directory_size
+# Take care that the file ends with a newline, otherwise the cron job won't work
+* * * * * root du -b ~/dev/deutsche-bahn/download | sed -ne 's/^\([0-9]\+\)\t\(.*\)$/node_directory_size_bytes{directory="\2"} \1/p' > ~/monitoring/node_exporter/textfile_collector/directory_size.prom.$$ && mv  ~/monitoring/node_exporter/textfile_collector/directory_size.prom.$$  ~/monitoring/node_exporter/textfile_collector/directory_size.prom

@@ -43,3 +43,36 @@ python3 ./src/main.py
 python3 ./src/util/decompress.py
 python3 ./src/util/date_converter.py
 ```
+
+## Monitoring (Prometheus)
+<details>
+    <summary><strong>Monitoring directory sizes with Textfile Collector</strong></summary>
+
+Adapted from [this great article](https://www.robustperception.io/monitoring-directory-sizes-with-the-textfile-collector/) using the [Textfile Collector](https://github.com/prometheus/node_exporter#textfile-collector) from the `node_exporter`.
+
+"To use it, set the `--collector.textfile.directory` flag on the `node_exporter` commandline. The collector will parse all files in that directory matching the glob `*.prom` using the text format."
+
+```
+./node_exporter --collector.textfile.directory ~/monitoring/node_exporter/textfile_collector/
+```
+
+Cron job I've used by putting it in `/etc/cron.d/`: [`directory_size`](./monitoring/directory_size)
+</details>
+
+
+<details>
+    <summary><strong>Prometheus useful commands</strong></summary>
+
+**Start Prometheus**<br>
+```
+./prometheus --config.file=./prometheus.yml --web.config.file=./web.yml --web.enable-admin-api
+```
+
+**Create snapshot**<br>
+_For this, the Admin API has to be enabled. To do so, pass `--web.enable-admin-api` as command line flag when starting Prometheus._
+```
+POST /api/v1/admin/tsdb/snapshot
+```
+Snapshots are located in the Prometheus folder under `data/snapshots/`.
+</details>
+
