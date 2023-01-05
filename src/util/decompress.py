@@ -2,7 +2,8 @@ import os
 import zlib
 
 filenames = os.listdir('./download')
-os.mkdir('./download-decompressed/')
+if not os.path.exists('./download-decompressed'):
+    os.mkdir('./download-decompressed/')
 
 for filename in filenames:
     # Open
@@ -13,5 +14,7 @@ for filename in filenames:
     xml_string = zlib.decompress(content).decode('utf-8')
 
     # Save decompressed
-    with open(os.path.join('./download-decompressed/', filename), 'w') as f:
+    # Get rid of ".compressed" file ending
+    filename_new = filename[0:filename.rfind('.')]
+    with open(os.path.join('./download-decompressed/', filename_new), 'w') as f:
         f.write(xml_string)
