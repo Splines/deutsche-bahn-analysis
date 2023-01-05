@@ -80,8 +80,9 @@ def _make_api_call(url) -> Tuple[bool, str]:
 
 
 def _compress_and_save(string, path_suffix):
-    # Remove empty lines
-    string = os.linesep.join([s for s in string.splitlines() if s])
+    # Remove all line breaks & empty lines
+    # and whitespaces in the beginning and at the end of every line
+    string = ''.join([s.strip() for s in string.splitlines() if s])
     # Compress
     bytes = zlib.compress(string.encode('utf-8'),
                           level=zlib.Z_BEST_COMPRESSION)
