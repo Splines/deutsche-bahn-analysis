@@ -1,11 +1,14 @@
 <p align="center">
-  <img alt="Live-Poll Logo" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Deutsche_Bahn_AG-Logo.svg" width="150" />
-  <h3 align="center">Deutsche Bahn Analysis</h3>
+  <img alt="Live-Poll Logo" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Deutsche_Bahn_AG-Logo.svg" width="100" />
+  <h3 align="center">Deutsche Bahn<sup>*</sup> Analysis</h3>
   <p align="center">Analyzing delays of the Deutsche Bahn (DB) in the course of 2023.</p>
 </p>
 
-| :warning:   | At the moment, this repo is primarily a playground for a funny little data science project. While I usually put in an effort to write clean and well-documented code, please note that these standards will suffer in this project as this is more aimed to "get things done" instead of writing the best code. And of course, things might change very often as this is a playground. |
+| :warning:   | At the moment, this repo is primarily a playground for a funny little data science project. While I usually put in an effort to write clean and well-documented code, please note that these standards will suffer in this project as this is more aimed to "get things done" instead of writing the best code. And of course, things might change very often as this is a playground.|
 |---------------|:-------------------------|
+
+<sub><sup>(*) This project is not endorsed at all by the official Deutsche Bahn.</sup></sub>
+
 
 ## What is this?
 While most of the time, at least in my experience, DB trains arrive on schedule, there are still these one or two situations where there is a huge delay or a small, yet big enough delay, so that you miss your connection. David Kriesel has conducted an extensive study of the DB in the course of 2019 and presented his results in a very engaging way at the chaos computer club (ccc) (see [this video](https://youtube.com/watch?v=0rb9CfOvojk)).
