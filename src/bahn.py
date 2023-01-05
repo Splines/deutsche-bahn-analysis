@@ -101,7 +101,7 @@ def start_downloads():
     _check_for_downloads_directory()
 
     print('Waiting till next minute...')
-    # sleep_till_start_of_next_minute()
+    sleep_till_start_of_next_minute()
     print('Started bahn.py execution...')
     # one full request in the beginning
     make_request_and_save(full_request=True)
