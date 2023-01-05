@@ -79,9 +79,11 @@ def _make_api_call(url) -> Tuple[bool, str]:
     return api_error, xml_string
 
 
-def _compress_and_save(xml_string, path_suffix):
+def _compress_and_save(string, path_suffix):
+    # Remove empty lines
+    string = os.linesep.join([s for s in string.splitlines() if s])
     # Compress
-    bytes = zlib.compress(xml_string.encode('utf-8'),
+    bytes = zlib.compress(string.encode('utf-8'),
                           level=zlib.Z_BEST_COMPRESSION)
     # Save response
     datetime_string = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
