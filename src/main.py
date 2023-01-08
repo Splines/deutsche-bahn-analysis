@@ -16,7 +16,7 @@ def start():
     try:
         start_downloads()
     except Exception as e:
-        logger.error(str(e))
+        logger.exception(e)
         handle_crash()
 
 
