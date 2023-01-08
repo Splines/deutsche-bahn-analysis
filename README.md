@@ -23,6 +23,8 @@ Some questions I hope to answer:
 - Which stations have the most delays overall ? (_of course weighted with the number of total trains passing through that station_)
 - At which station do trains "collect" most delays? -> _These are the stations you have to keep your fingers crossed._
 
+## Additional resources
+- [DB Haltestellen (stops)](https://data.deutschebahn.com/dataset/data-haltestellen.html)
 
 ## Setup
 Create a `.env` file with these entries in the root of the cloned repository. You get the credential by registering for the [**DB API Marketplace**](https://developers.deutschebahn.com/db-api-marketplace/apis/) (for free).
