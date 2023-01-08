@@ -8,8 +8,8 @@ import requests
 from dotenv import load_dotenv
 
 from logging_setup import get_bahn_logger
-from schedule import every, sleep_till_start_of_next_minute
 from util.fileutil import create_folder_if_not_exists
+from util.scheduling import every, sleep_till_start_of_next_minute
 
 load_dotenv()
 

@@ -15,7 +15,7 @@ def every(delay: int, task, execute_immediately: bool, *args, **kwargs):
     next_time = time.time()
     if not execute_immediately:
         next_time += delay
-        
+
     while True:
         time.sleep(max(0, next_time - time.time()))
         try:
