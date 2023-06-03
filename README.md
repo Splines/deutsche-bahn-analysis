@@ -40,7 +40,7 @@ The script is intended to be run indefinitely in the background on a server.
 python3 ./src/main.py
 ```
 
-## Usefull scripts
+## Useful scripts
 ```
 python3 ./src/util/decompress.py
 python3 ./src/util/date_converter.py
